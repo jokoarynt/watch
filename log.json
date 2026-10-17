@@ -1,35 +1,14 @@
 [
   {
-    "type": "film",
-    "title": "Interstellar",
-    "year": 2014,
-    "watched_datetime": "10 Okt 2026 - 21:00",
-    "rating": "5",
-    "review": "Visual dan skoring musik dari Hans Zimmer sangat luar biasa."
-  },
-  {
     "type": "series",
-    "title": "Breaking Bad",
-    "year": 2008,
+    "title": "VisionQuest",
+    "year": 2026,
     "episodes": [
       {
-        "name": "Season 1 - Episode 1 (Pilot)",
-        "watched_date": "15 Okt 2026",
-        "rating": "4.5",
-        "review": "Awal cerita yang sangat kuat."
-      },
-      {
-        "name": "Season 1 - Episode 2 (Cat's in the Bag...)",
-        "watched_date": "16 Okt 2026",
-        "rating": "4"
+        "name": "Ep 1: No Strings",
+        "watched_date": "17-10-26 19:52",
+        "rating": "4.5"
       }
     ]
-  },
-  {
-    "type": "film",
-    "title": "Inception",
-    "year": 2010,
-    "watched_datetime": "18 Okt 2026 - 23:15",
-    "rating": "4.5"
   }
 ]
