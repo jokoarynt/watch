@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang=en>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta charset=UTF-8>
+  <meta name=viewport content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Watch Log</title>
   <style>
     body {
@@ -112,50 +112,50 @@
 </head>
 <body>
 
-  <div id="container">
-    <div id="log-container">
-      <div class="status-msg">Memuat data tontonan...</div>
+  <div id=container>
+    <div id=log-container>
+      <div class=status-msg>Loading....</div>
     </div>
   </div>
 
-  <!-- Overlay Tekstur -->
+  <!-- overlay -->
   <i style="position: fixed; inset: 0; pointer-events: none; background: url(data:image/webp;base64,UklGRhgAAABXRUJQVlA4TAsAAAAvAUAAEIiIP81GAAA); z-index: 999;"></i>
 
   <script>
     // @ts-nocheck
 
-    const starSvg = `<svg class="star-icon" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.431 8.2 1.192-5.934 5.784 1.399 8.166L12 18.896l-7.333 3.864 1.399-8.166L.067 9.21l8.2-1.192z"/></svg>`;
+    const starSvg = `<svg class=star-icon viewBox="0 0 24 24"><path d="M12 .587l3.668 7.431 8.2 1.192-5.934 5.784 1.399 8.166L12 18.896l-7.333 3.864 1.399-8.166L.067 9.21l8.2-1.192z"/></svg>`;
 
     function renderLog(data) {
       const container = document.getElementById('log-container');
       
-      let html = '<div class="log-box">';
+      let html = '<div class=log-box>';
       
       data.forEach(item => {
         if (item.type === 'film') {
           const ratingUI = item.rating ? `${item.rating}${starSvg}` : '';
           html += `
-            <div class="log-entry">
+            <div class=log-entry>
               <span class="item-header glow-title">${item.title} (${item.year})</span>
-              <span class="detail-text">[${item.watched_datetime}] ${ratingUI}</span>
-              ${item.review ? `<div class="review">"${item.review}"</div>` : ''}
+              <span class=detail-text>[${item.watched_datetime}] ${ratingUI}</span>
+              ${item.review ? `<div class=review>"${item.review}"</div>` : ''}
             </div>
           `;
         } else if (item.type === 'series') {
           html += `
-            <div class="log-entry">
+            <div class=log-entry>
               <span class="item-header glow-title">${item.title} (${item.year})</span>
-              <div class="episodes-box">
+              <div class=episodes-box>
           `;
           
           if (item.episodes && item.episodes.length > 0) {
             item.episodes.forEach(ep => {
               const epRatingUI = ep.rating ? `${ep.rating}${starSvg}` : '';
               html += `
-                <div class="episode-row">
+                <div class=episode-row>
                   <span>${ep.name}</span>
-                  <span class="sub-meta">[${ep.watched_date}] ${epRatingUI}</span>
-                  ${ep.review ? `<div class="review">"${ep.review}"</div>` : ''}
+                  <span class=sub-meta>[${ep.watched_date}] ${epRatingUI}</span>
+                  ${ep.review ? `<div class=review>"${ep.review}"</div>` : ''}
                 </div>
               `;
             });
@@ -172,7 +172,7 @@
       container.innerHTML = html;
     }
 
-    // Efek glow dinamis pada judul
+    // glow
     setInterval(_ => {
       const titleElements = document.querySelectorAll('.glow-title');
       titleElements.forEach(el => {
@@ -180,10 +180,10 @@
       });
     }, 50);
 
-    // Mengambil data murni dari log.json
+    // get data
     fetch('log.json')
       .then(response => {
-        if (!response.ok) throw new Error("Gagal mengambil file log.json");
+        if (!response.ok) throw new Error("Loading....");
         return response.json();
       })
       .then(data => {
@@ -191,7 +191,7 @@
       })
       .catch(err => {
         document.getElementById('log-container').innerHTML = `
-          <div class="status-msg" style="color: #ff4d4d;">
+          <div class=status-msg style="color: #ff4d4d;">
             [ERROR] ${err.message}
           </div>
         `;
