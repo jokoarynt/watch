@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Watch Log</title>
+  <style>
+    body {
+      background: #0a0a0a;
+      color: #fff;
+      font-family: sans-serif;
+      margin: 0;
+      padding: 20px 16px;
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+      box-sizing: border-box;
+    }
+
+    #container {
+      width: 100%;
+      max-width: 650px;
+      background: #151515;
+      border-radius: 1em;
+      padding: 24px;
+      box-sizing: border-box;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.8);
+      position: relative;
+      z-index: 1;
+    }
+
+    a {
+      color: yellow;
+      text-decoration: none;
+    }
+    
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .log-box {
+      text-align: left;
+    }
+
+    .log-entry {
+      margin-bottom: 20px;
+    }
+
+    .item-header {
+      font-size: 1.05rem;
+      font-weight: bold;
+      color: yellow;
+      display: block;
+      margin-bottom: 4px;
+      text-shadow: 0 0 1em yellow;
+    }
+
+    .detail-text {
+      font-weight: normal;
+      color: #aaa;
+      font-size: 0.9rem;
+    }
+
+    .episodes-box {
+      margin-top: 8px;
+      padding-left: 14px;
+      border-left: 2px solid #262626;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .episode-row {
+      font-size: 0.9rem;
+      color: #ddd;
+    }
+
+    .sub-meta {
+      color: #aaa;
+      font-size: 0.82rem;
+      margin-left: 4px;
+    }
+
+    .star-icon {
+      width: 13px;
+      height: 13px;
+      fill: yellow;
+      vertical-align: -1px;
+      margin-left: 2px;
+      margin-right: 1px;
+      display: inline-block;
+    }
+
+    .review {
+      margin: 4px 0 2px 0;
+      font-size: 0.85rem;
+      color: #f1f1f1;
+      font-style: italic;
+      background: #1a1a1a;
+      padding: 6px 10px;
+      border-left: 2px solid yellow;
+      border-radius: 4px;
+    }
+
+    .status-msg {
+      color: yellow;
+      text-align: center;
+      padding: 20px;
+      font-size: 0.95rem;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="container">
+    <div id="log-container">
+      <div class="status-msg">Memuat data tontonan...</div>
+    </div>
+  </div>
+
+  <!-- Overlay Tekstur -->
+  <i style="position: fixed; inset: 0; pointer-events: none; background: url(data:image/webp;base64,UklGRhgAAABXRUJQVlA4TAsAAAAvAUAAEIiIP81GAAA); z-index: 999;"></i>
+
+  <script>
+    // @ts-nocheck
+
+    const starSvg = `<svg class="star-icon" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.431 8.2 1.192-5.934 5.784 1.399 8.166L12 18.896l-7.333 3.864 1.399-8.166L.067 9.21l8.2-1.192z"/></svg>`;
+
+    function renderLog(data) {
+      const container = document.getElementById('log-container');
+      
+      let html = '<div class="log-box">';
+      
+      data.forEach(item => {
+        if (item.type === 'film') {
+          const ratingUI = item.rating ? `${item.rating}${starSvg}` : '';
+          html += `
+            <div class="log-entry">
+              <span class="item-header glow-title">${item.title} (${item.year})</span>
+              <span class="detail-text">[${item.watched_datetime}] ${ratingUI}</span>
+              ${item.review ? `<div class="review">"${item.review}"</div>` : ''}
+            </div>
+          `;
+        } else if (item.type === 'series') {
+          html += `
+            <div class="log-entry">
+              <span class="item-header glow-title">${item.title} (${item.year})</span>
+              <div class="episodes-box">
+          `;
+          
+          if (item.episodes && item.episodes.length > 0) {
+            item.episodes.forEach(ep => {
+              const epRatingUI = ep.rating ? `${ep.rating}${starSvg}` : '';
+              html += `
+                <div class="episode-row">
+                  <span>${ep.name}</span>
+                  <span class="sub-meta">[${ep.watched_date}] ${epRatingUI}</span>
+                  ${ep.review ? `<div class="review">"${ep.review}"</div>` : ''}
+                </div>
+              `;
+            });
+          }
+          
+          html += `
+              </div>
+            </div>
+          `;
+        }
+      });
+
+      html += '</div>';
+      container.innerHTML = html;
+    }
+
+    // Efek glow dinamis pada judul
+    setInterval(_ => {
+      const titleElements = document.querySelectorAll('.glow-title');
+      titleElements.forEach(el => {
+        el.style.textShadow = `0 0 ${1.0 + Math.sin(+new Date / 300)}em yellow`;
+      });
+    }, 50);
+
+    // Mengambil data murni dari log.json
+    fetch('log.json')
+      .then(response => {
+        if (!response.ok) throw new Error("Gagal mengambil file log.json");
+        return response.json();
+      })
+      .then(data => {
+        renderLog(data);
+      })
+      .catch(err => {
+        document.getElementById('log-container').innerHTML = `
+          <div class="status-msg" style="color: #ff4d4d;">
+            [ERROR] ${err.message}
+          </div>
+        `;
+      });
+  </script>
+
+</body>
+</html>
