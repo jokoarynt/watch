@@ -1,5 +1,12 @@
 [
   {
+    "type": "film",
+    "title": "Crayon Shin-chan: Jungle That Invites Storm",
+    "year": 2000,
+    "watched_datetime": "21 Okt 2026 - 13:14",
+    "rating": "3.0"
+  },
+  {
     "type": "series",
     "title": "VisionQuest",
     "year": 2026,
