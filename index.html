@@ -87,7 +87,17 @@
       fill: yellow;
       vertical-align: -1px;
       margin-left: 2px;
-      margin-right: 1px;
+      margin-right: 2px;
+      display: inline-block;
+    }
+
+    .clock-icon {
+      width: 13px;
+      height: 13px;
+      fill: #aaa;
+      vertical-align: -1px;
+      margin-right: 3px;
+      margin-left: 2px;
       display: inline-block;
     }
 
@@ -125,6 +135,7 @@
     // @ts-nocheck
 
     const starSvg = `<svg class=star-icon viewBox="0 0 24 24"><path d="M12 .587l3.668 7.431 8.2 1.192-5.934 5.784 1.399 8.166L12 18.896l-7.333 3.864 1.399-8.166L.067 9.21l8.2-1.192z"/></svg>`;
+    const clockSvg = `<svg class=clock-icon viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.58 22 12s-4.48-10-9.99-10zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>`;
 
     function renderLog(data) {
       const container = document.getElementById('log-container');
@@ -133,11 +144,11 @@
       
       data.forEach(item => {
         if (item.type === 'film') {
-          const ratingUI = item.rating ? `${item.rating}${starSvg}` : '';
+          const ratingUI = item.rating ? `${starSvg}${item.rating}` : '';
           html += `
             <div class=log-entry>
               <span class="item-header glow-title">${item.title} (${item.year})</span>
-              <span class=detail-text>[${item.watched_datetime}] ${ratingUI}</span>
+              <span class=detail-text>${clockSvg}${item.watched_datetime} ${ratingUI}</span>
               ${item.review ? `<div class=review>"${item.review}"</div>` : ''}
             </div>
           `;
@@ -150,11 +161,11 @@
           
           if (item.episodes && item.episodes.length > 0) {
             item.episodes.forEach(ep => {
-              const epRatingUI = ep.rating ? `${ep.rating}${starSvg}` : '';
+              const epRatingUI = ep.rating ? `${starSvg}${ep.rating}` : '';
               html += `
                 <div class=episode-row>
                   <span>${ep.name}</span>
-                  <span class=sub-meta>[${ep.watched_date}] ${epRatingUI}</span>
+                  <span class=sub-meta>${clockSvg}${ep.watched_date} ${epRatingUI}</span>
                   ${ep.review ? `<div class=review>"${ep.review}"</div>` : ''}
                 </div>
               `;
