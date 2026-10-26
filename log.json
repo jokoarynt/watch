@@ -1,6 +1,13 @@
 [
   {
     "type": "film",
+    "title": "Crayon Shin-chan: The Legend Called Buri Buri 3 Minutes Charge",
+    "year": 2005,
+    "watched_datetime": "26-10-26 20:50",
+    "rating": "3"
+  },
+  {
+    "type": "film",
     "title": "Spider-Man: Brand New Day",
     "year": 2026,
     "watched_datetime": "23-10-26 23:11",
