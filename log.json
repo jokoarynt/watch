@@ -1,26 +1,5 @@
 [
   {
-    "type": "film",
-    "title": "Crayon Shin-chan: The Legend Called Buri Buri 3 Minutes Charge",
-    "year": 2005,
-    "watched_datetime": "26-10-26 20:50",
-    "rating": "3"
-  },
-  {
-    "type": "film",
-    "title": "Spider-Man: Brand New Day",
-    "year": 2026,
-    "watched_datetime": "23-10-26 23:11",
-    "rating": "3.4"
-  },
-  {
-    "type": "film",
-    "title": "Crayon Shin-chan: Jungle That Invites Storm",
-    "year": 2000,
-    "watched_datetime": "23-10-26 13:14",
-    "rating": "3.4"
-  },
-  {
     "type": "series",
     "title": "VisionQuest",
     "year": 2026,
@@ -44,7 +23,38 @@
         "name": "Ep 4: Malware",
         "watched_date": "22-10-26 21:32",
         "rating": "3.9"
+      },
+      {
+        "name": "Ep 5: Firewall",
+        "watched_date": "28-10-26 21:18",
+        "rating": "3.8"
+      },
+      {
+        "name": "Ep 6: Deadlock",
+        "watched_date": "30-10-26 20:51",
+        "rating": "3.9"
       }
     ]
+  },
+  {
+    "type": "film",
+    "title": "Crayon Shin-chan: The Legend Called Buri Buri 3 Minutes Charge",
+    "year": 2005,
+    "watched_datetime": "26-10-26 20:50",
+    "rating": "3"
+  },
+  {
+    "type": "film",
+    "title": "Spider-Man: Brand New Day",
+    "year": 2026,
+    "watched_datetime": "23-10-26 23:11",
+    "rating": "3.4"
+  },
+  {
+    "type": "film",
+    "title": "Crayon Shin-chan: Jungle That Invites Storm",
+    "year": 2000,
+    "watched_datetime": "23-10-26 13:14",
+    "rating": "3.4"
   }
 ]
